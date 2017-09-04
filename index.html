@@ -20,14 +20,42 @@
   <div class="row"><p></p></div>
   <div class="row"><p></p></div>
   <div class="row" >
+    <script>
+      function loadBadge() {
+        console.log("Entrou!!!");
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            json = JSON.parse(this.responseText);
+            document.getElementById("MONbadge").innerHTML = json["MON"];
+            document.getElementById("TUEbadge").innerHTML = json["TUE"];
+            document.getElementById("WEDbadge").innerHTML = json["WED"];
+            document.getElementById("THUbadge").innerHTML = json["THU"];
+            document.getElementById("FRIbadge").innerHTML = json["FRI"];
+            document.getElementById("SATbadge").innerHTML = json["SAT"];
+            document.getElementById("SUNbadge").innerHTML = json["SUN"];
+          }
+        };
+        xhttp.open("GET", "/Numbers.txt", true);
+        xhttp.send();
+      }
+    </script>
     <div class="btn-group btn-group-justified">
-      <a href="#" class="btn">MON   <span class="badge">2</span></a>
-      <a href="#" class="btn">TUE   <span class="badge">3</span></a>
-      <a href="#" class="btn">WED   <span class="badge">4</span></a>
-      <a href="#" class="btn">THU   <span class="badge">5</span></a>
-      <a href="#" class="btn">FRI   <span class="badge">6</span></a>
-      <a href="#" class="btn">SAT   <span class="badge">7</span></a>
-      <a href="#" class="btn">SUN   <span class="badge">8</span></a>
+      <script>loadBadge();</script>
+      <a href="#" class="btn" id="MON">MON   <span class="badge" id="MONbadge"></span></a>
+      <!-- <script>document.getElementById("MONbadge").innerHTML = 2;</script> -->
+      <a href="#" class="btn" id="TUE">TUE   <span class="badge" id="TUEbadge"></span></a>
+      <!-- <script>document.getElementById("TUEbadge").innerHTML = 2;</script> -->
+      <a href="#" class="btn" id="WED">WED   <span class="badge" id="WEDbadge"></span></a>
+      <!-- <script>document.getElementById("WEDbadge").innerHTML = 2;</script> -->
+      <a href="#" class="btn" id="THU">THU   <span class="badge" id="THUbadge"></span></a>
+      <!-- <script>document.getElementById("THUbadge").innerHTML = 2;</script> -->
+      <a href="#" class="btn" id="FRI">FRI   <span class="badge" id="FRIbadge"></span></a>
+      <!-- <script>document.getElementById("FRIbadge").innerHTML = 2;</script> -->
+      <a href="#" class="btn" id="SAT">SAT   <span class="badge" id="SATbadge"></span></a>
+      <!-- <script>document.getElementById("SATbadge").innerHTML = 2;</script> -->
+      <a href="#" class="btn" id="SUN">SUN   <span class="badge" id="SUNbadge"></span></a>
+      <!-- <script>document.getElementById("SUNbadge").innerHTML = 2;</script> -->
     </div>
   </div>
 </div>
