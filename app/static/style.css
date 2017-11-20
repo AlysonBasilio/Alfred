@@ -1,0 +1,220 @@
+    @CHARSET "UTF-8";
+    /*
+    over-ride "Weak" message, show font in dark grey
+    */
+
+    .progress-bar {
+        color: #333;
+    } 
+    .errMsg{
+      color:red;
+    }
+    .print{
+      text-align: center;
+      display: none;
+    }
+    /*
+    Reference:
+    http://www.bootstrapzen.com/item/135/simple-login-form-logo/
+    */
+
+    * {
+        -webkit-box-sizing: border-box;
+         -moz-box-sizing: border-box;
+              box-sizing: border-box;
+      outline: none;
+    }
+
+        .form-control {
+        position: relative;
+        height: auto;
+        padding: 10px;
+        @include box-sizing(border-box);
+
+        &:focus {
+          z-index: 2;
+        }
+      }
+
+    body {
+      background: url("img/bg+desfoque.jpg") no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+
+    .login-form {
+      margin-top: 60px;
+    }
+
+    form[role=login] {
+      color: #5d5d5d;
+      background: #f2f2f2;
+      padding: 26px;
+      border-radius: 10px;
+      -moz-border-radius: 10px;
+      -webkit-border-radius: 10px;
+    }
+      form[role=login] img {
+        display: block;
+        margin: 0 auto;
+        margin-bottom: 35px;
+      }
+      form[role=login] input,
+      form[role=login] button {
+        font-size: 18px;
+        margin: 16px 0;
+      }
+      form[role=login] > div {
+        text-align: center;
+      }
+      
+    .form-links {
+      text-align: center;
+      margin-top: 1em;
+      margin-bottom: 50px;
+    }
+      .form-links a {
+        color: #fff;
+      }
+
+
+
+
+    /* Logos-Header.php */
+    #logosprint .logo-delfos-r {
+        height: 130px; 
+        width: 175px; 
+        float: left;
+    }
+
+    #logosprint .logo-omega {
+        height: 50px; 
+        float: right;
+    }
+
+    /* Index.php (Root Alpha) */
+    .page-header {
+        background: #ddd;
+        z-index: 10;
+        padding: 5px; 
+    }
+    .header {
+        max-height: 50px;
+        background: red;
+        width: 100%;
+    /*    padding-left: 225px;*/
+        top: 0;
+    }
+
+    ul.nav.navbar-nav.side-nav {
+    /*    top: 0;*/
+    /*    padding-top: 100px;*/
+        box-shadow: 0px 3px 6px 0 rgba(0,0,0,.16), 
+                    0px 3px 6px 0 rgba(0,0,0,.23);
+    }
+
+    @media only screen and (max-width: 768px) {
+        .page-header {
+            float: none;
+        }
+        ul.nav.navbar-nav.side-nav {
+            padding-top: 0;
+        }
+        .logo-delfos-b {
+            margin-bottom: 0 !important;
+        }
+        .logo-omega-b {
+            margin-top: 0 !important;
+        }
+    }
+
+    .logo-delfos-r {
+        height: 130px; 
+        width: 175px;
+        margin-top:5px;
+    }
+
+    .logo-delfos-b {
+        height: 60px; 
+        width: 150px;
+        margin-bottom: 30px;
+    }
+    .logo-omega {
+        height: 50px; 
+        float: right;
+        margin-top:45px;
+    }
+    .logo-omega-b {
+        height: 23.6px;
+        width: 80.4px;
+        background: #fff;
+        -webkit-background-clip: text;
+        color: transparent;
+        margin-top: 200px;
+    }
+    .navbar-inverse .navbar-nav > li > a {
+        transition: all .3s ease;
+    }
+
+    .nav > li {
+        position: relative;
+        display: block;
+    }
+
+    #page-wrapper {
+        background-color: #f7f6f7;
+    }
+    .page-header {
+        border-bottom: 1px solid #ccc;
+    }
+    .panel {
+        border: none;
+        box-shadow: 0px 3px 6px 0 rgba(0,0,0,.16),
+                    0px 3px 6px 0 rgba(0,0,0,.23);
+    }
+    .panel-primary {
+        box-shadow: 0px 3px 6px 0 rgba(0,0,0,.16),
+                    0px 3px 6px 0 rgba(0,0,0,.23);
+    }
+    .panel-primary > .panel-heading {
+        background-color: #222;
+        border-color: #222;
+    }
+    .fa-location-arrow {
+        color: #f15922;
+    }
+    .view-details {
+        color: #222;
+        transition: all .3s ease;
+    }
+    .view-details:hover {
+        color: #f15922;
+    }
+    .table-responsive {
+        background: #fff !important;
+        box-shadow: 0px 3px 6px 0 rgba(0,0,0,.16),
+                    0px 3px 6px 0 rgba(0,0,0,.23);
+    }
+
+    /* Monthly Availability */
+    #container {
+        min-width: 310px; 
+        height: 400px; 
+        margin: 0 auto;
+    }
+
+    td {
+        vertical-align: middle !important;
+    }
+
+    .btn-primary {
+        border: none;
+        background-color: #f15922;
+        transition: all .3s ease;
+    }
+    .btn-primary:hover {
+        border: none;
+        background-color: #e05922;
+    }

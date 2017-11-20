@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>
+    Alfred's Home Page
+  </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+  <div class="page-header">
+    <img src="unnamed.png" class="img-circle" alt="Alfred's Picture" align="left" width="100" height="100">
+    <h2 class="text-center">Welcome! I'm Alfred, your personal assistant.</h2>
+    <form action="/logout" method="get">
+      <button name="logout" type="submit" value="logout">Logout</button>
+    </form>
+  </div>
+  <div class="row"><p></p></div>
+  <div class="row"><p></p></div>
+  <div class="row"><p></p></div>
+  <div class="row" >
+    <script>
+      $(function() {
+          $.getJSON('/loadbadges',
+              function(json) {
+                  document.getElementById("MONbadge").innerHTML = json["MON"];
+                  document.getElementById("TUEbadge").innerHTML = json["TUE"];
+                  document.getElementById("WEDbadge").innerHTML = json["WED"];
+                  document.getElementById("THUbadge").innerHTML = json["THU"];
+                  document.getElementById("FRIbadge").innerHTML = json["FRI"];
+                  document.getElementById("SATbadge").innerHTML = json["SAT"];
+                  document.getElementById("SUNbadge").innerHTML = json["SUN"];
+              });
+          return false;
+      });
+      function getActivitiesOfDay(day) {
+        $.getJSON('/getActivitiesOfDay',{
+            day_of_week:day
+        }, function(json) {
+          var table="<tr><th>Time</th><th>Activities</th><th>Priority</th><th>Tag</th></tr>";
+          for (i = 0; i <json.length; i++) {
+            table += "<tr><td>" +
+            json[i]['hour'] + "</td><td>" +
+            json[i]['description'] + "</td><td>"+
+            json[i]['priority'] + "</td><td><span class=\"label label-primary\">"+
+            json[i]['tag'] + "</span></td></tr>";
+          }
+          document.getElementById("tabela_atividades").innerHTML = table;
+        });
+      }
+    </script>
+    <div class="btn-group btn-group-justified">
+      <a href="#" class="btn" id="MON" onclick=getActivitiesOfDay("MON")>MON   <span class="badge" id="MONbadge"></span></a>
+      <a href="#" class="btn" id="TUE" onclick=getActivitiesOfDay("TUE")>TUE   <span class="badge" id="TUEbadge"></span></a>
+      <a href="#" class="btn" id="WED" onclick=getActivitiesOfDay("WED")>WED   <span class="badge" id="WEDbadge"></span></a>
+      <a href="#" class="btn" id="THU" onclick=getActivitiesOfDay("THU")>THU   <span class="badge" id="THUbadge"></span></a>
+      <a href="#" class="btn" id="FRI" onclick=getActivitiesOfDay("FRI")>FRI   <span class="badge" id="FRIbadge"></span></a>
+      <a href="#" class="btn" id="SAT" onclick=getActivitiesOfDay("SAT")>SAT   <span class="badge" id="SATbadge"></span></a>
+      <a href="#" class="btn" id="SUN" onclick=getActivitiesOfDay("SUN")>SUN   <span class="badge" id="SUNbadge"></span></a>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <h2>Diary</h2>
+  <p>This is what you have planned for this day.</p>
+  <table class="table table-hover" id="tabela_atividades">
+  </table>
+</div>
+<div class="container-fluid">
+  <p>Insert new Activity</p>
+  <form action="" method="post">
+    <div class="form-group row">
+      <div class="col-md-4">
+        <label for="form_day">Day:</label>
+        <select class="form-control" name="day" id="select_day" value="{{request.form.day }}">
+          <option value="MON">MON</option>
+          <option value="TUE">TUE</option>
+          <option value="WED">WED</option>
+          <option value="THU">THU</option>
+          <option value="FRI">FRI</option>
+          <option value="SAT">SAT</option>
+          <option value="SUN">SUN</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-4">
+        <label for="form_hour">Hour:</label>
+        <input type="time" class="form-control" name="hour" id="form_hour" value="{{
+          request.form.hour }}">
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-4">
+        <label for="description">Description:</label>
+        <input type="text" class="form-control" name="description" id="form_description" value="{{
+          request.form.description }}">
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-4">
+        <label for="priority">Priority:</label>
+        <input type="number" class="form-control" name="priority" min="1" max="10" id="form_priority" value="{{
+          request.form.priority }}">
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-4">
+        <label for="tag">Tag:</label>
+        <input type="text" class="form-control" name="tag" id="form_tag" value="{{
+          request.form.tag }}">
+      </div>
+    </div>
+    <input class="btn btn-default" type="submit" value="Insert New Activity">
+  </form>
+  {% if error %}
+    <p class="error"><strong>Error:</strong> {{ error }}
+  {% endif %}
+</div>
+
+</body>
+</html>

@@ -1,0 +1,294 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Delfos Intelligent Maintenance</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato|Open+Sans" rel="stylesheet">
+
+    <!-- Bootstrap Core CSS -->
+	
+	 <link href="bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="sb-admin.css" rel="stylesheet">
+   
+    <!-- Custom Fonts -->
+    <link href="font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="style.css" type="text/css"/>
+
+    <script src="table.js" type="text/Javascript"></script>
+	
+	<script type="text/javascript" charset="utf8" src="dataTables.js"></script>
+	
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+
+
+<style>
+
+
+</style>
+
+
+<script type=text/javascript>
+        //Função que recebe o texto escrito dentro da caixa de mensagens e faz
+        //a classificação.
+        $(function() {
+            $('a#process_input').bind('click', function() {
+                $.getJSON('/background_process', {
+                    wotext: $('input[name="wo"]').val()
+                }, function(data) {
+                    if (data.error) {
+                        if (data.error = "Error: Missing text, Description: The 'text' parameter is empty., Code: 400")
+                            $('#errorAlert').text("INSERT TEXT!").show();
+                        else
+                            $('#errorAlert').text(data.error).show();
+                        $('#successAlert').hide();
+                        $('#queryForm').hide();
+                    } else {
+                        text = "";
+                        for (i in data.array) {
+                            console.log(data.array[i]);
+                            text += "<tr><td><font color = \"white\">"+data.array[i]["DowntimeID"]+"</font></td><td><font color = \"white\">"+data.array[i]["WTGID"]+"</font></td><td><font color = \"white\">"+data.array[i]["AlarmCode"]+"</font></td><td><font color = \"white\">"+data.array[i]["StartTime"]+"</font></td><td><font color = \"white\">"+data.array[i]["Duration"]+"</font></td><td><font color = \"white\">"+data.array[i]["AlarmDescription"]+"</font></td><td><font color = \"white\">"+data.array[i]["ParkID"]+"</font></td><td><font color = \"white\">"+data.array[i]["DowntimeComment"]+"</font></td><td><font color = \"white\">"+data.array[i]["FailureDescription"]+"</font></td><td><font color = \"white\">"+data.array[i]["SystemFailure"]+"</font></td></tr>";
+                        }
+                        $("#queryResult").find('tbody').html(text).show();
+                        console.log("Entrou aqui");
+                        $('#errorAlert').hide();
+                    }
+					});
+                return false;
+            });
+        });
+
+                    // if (data.error) {
+                    //     $('#errorAlert').text("Database error: " + data.error).show();
+                    // } else {
+                    //
+                    // }
+    </script>
+	
+	
+
+</head>
+
+<body>
+
+    
+	<div id="wrapper">
+	<nav class="navbar-inverse bg-inverse" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapseMenu" aria-expanded="false">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="http://client.delfosim.com/dashboard/index.php"><span class="huge-omega"></span> Delfos Intelligent Maintenance </a>
+                </div>
+
+                <ul class="nav navbar-right top-nav">
+
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> delfos <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="http://client.delfosim.com/dashboard/includes/logout.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+	            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+
+	            <div class="collapse navbar-collapse navbar-ex1-collapse" id="collapseMenu">
+
+	                <ul id="style-3" class="nav navbar-nav side-nav" style="text-align: center;">
+                    <a href="http://client.delfosim.com/dashboard/index.php"><img class="logo-delfos-b" src="logo-branca.png"></img></a>
+
+	                <li>
+	                        <hr style="width: 60%">
+		            </li>
+
+					<li  style="text-align: left;">
+                        <a href="http://client.delfosim.com/dashboard/index.php"><i class="fa fa-fw fa-home"></i> Home</a>
+                    </li>
+
+                    <li class="" style="text-align: left;">
+	                    <a href="javascript:;" data-toggle="collapse" data-target="#management" aria-expanded="false" aria-controls="management"><i class="fa fa-fw fa-bar-chart" aria-hidden="true"></i> Management <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="management" class="collapse">
+
+						  <li class="item-interno"><a href="http://client.delfosim.com/dashboard/Management/productionbalancecluster">Production Balance</a></li>
+						  
+						  <li class="item-interno"><a href="http://client.delfosim.com/dashboard/Management/productioncomparative">Production Comparative</a></li>
+						  
+						  <li class="item-interno"><a href="http://client.delfosim.com/dashboard/Management/dailyproductioncluster">Production - Daily</a></li>
+						  
+						  <li class="item-interno"><a href="http://client.delfosim.com/dashboard/Management/monthlyproduction">Production - Monthly</a></li>
+						  
+						  <li class="item-interno"><a href="http://client.delfosim.com/dashboard/Management/availabilityxcapacityfactor">Capacity Factor x Availability</a></li>
+						  
+						  <li class="item-interno"><a href="http://client.delfosim.com/dashboard/Management/efficiencyxavailability">Efficiency x Availability</a></li>
+						  
+						  <li class="item-interno"><a href="http://client.delfosim.com/dashboard/Management/availabilitycomparative">Availability Comparative</a></li>
+						  
+						  <li class="item-interno"><a href="http://client.delfosim.com/dashboard/Management/monthlyavailability">Availability - Monthly</a></li>
+						  
+						  <li class="item-interno"><a href="http://client.delfosim.com/dashboard/Management/unavailabilitypareto">Unavailability Pareto</a></li>
+						  
+						  <li class="item-interno"><a href="http://client.delfosim.com/dashboard/Management/unavailabilityparetoperwtg">Unavailability Pareto per WTG</a></li>
+						 
+						  <li class="item-interno"><a href="http://client.delfosim.com/dashboard/Management/efficiencycomparative">Efficiency Comparative</a> </li>
+						  
+						  <li class="item-interno"><a href="http://client.delfosim.com/dashboard/Management/dailywindcluster">Wind Resource - Daily</a></li>
+						  
+						  <li class="item-interno"><a href="http://client.delfosim.com/dashboard/Management/monthwind">Wind Resource - Monthly</a> </li>
+
+						</ul>
+					</li>
+
+					<li  style="text-align: left;">
+	                    <a href="javascript:;" data-toggle="collapse" data-target="#reliability"><i class="fa fa-fw fa-line-chart" aria-hidden="true"></i> Reliability <i class="fa fa-fw fa-caret-down"></i></a>
+	               		<ul id="reliability" class="collapse">
+						
+							<li><a href="http://client.delfosim.com/dashboard/Reliability/mttr/">MTTR Heatmap</a></li>
+							
+							<li><a href="http://client.delfosim.com/dashboard/Reliability/mttrpersystem/">MTTR per System</a></li>
+							
+							<li><a href="http://client.delfosim.com/dashboard/Reliability/mttrperwtg/">MTTR per WTG</a></li><li><a href="/dashboard/Reliability/mtbf/">MTBF per WTG</a></li>
+	              </ul>
+					<li  style="text-align: left;">
+						<a href="javascript:;" data-toggle="collapse" data-target="#documentation"><i class="fa fa-fw fa-book"></i> Documentation<i class="fa fa-fw fa-caret-down"></i></a>
+						<ul id="documentation" class="collapse">
+							<li><a href="http://client.delfosim.com/dashboard/Documentation/delfos_docs/documentation.php">Delfos Docs  </a></li>
+							<li><a href="http://client.delfosim.com/dashboard/Documentation/alarm_dic/index.php">Alarm GE</a></li>
+							<li><a href="http://client.delfosim.com/dashboard/Documentation/alarm_gamesa/index.php">Alarm Gamesa</a></li>
+							<li><a href="http://client.delfosim.com/dashboard/Documentation/csv/index.php">Data CSV</a></li>
+	               		</ul>
+					</li>
+					<li class="" style="text-align: left;">
+	                    <a href="javascript:;" data-toggle="collapse" data-target="#performance"><i class="fa fa-fw fa-bar-chart" aria-hidden="true"></i> Performance <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="performance" class="collapse">
+						  <li><a href="http://client.delfosim.com/dashboard/Performance/envelopecomparative">Envelope Comparative</a></li>
+						  <li><a href="http://client.delfosim.com/dashboard/Performance/envelopes">Envelopes</a></li>
+						  <li><a href="http://client.delfosim.com/dashboard/Performance/powercurve">Power Curve</a></li>
+						</ul>
+					</li>
+                    <li class="" style="text-align: left;">
+	                    <a href="javascript:;" data-toggle="collapse" data-target="#operational"><i class="fa fa-fw fa-bar-chart" aria-hidden="true"></i> Operational <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="operational" class="collapse">
+						  <li><a href="http://client.delfosim.com/dashboard/Operational/operation_summary">Operational Summary</a></li>
+						  <li><a href="http://client.delfosim.com/dashboard/Operational/op_summary_daily">Operational Daily Summary </a></li>
+						  <li><a href="http://client.delfosim.com/dashboard/Operational/maintenance_summary">Maintenance Summary</a></li>
+						  <li><a href="http://client.delfosim.com/dashboard/Operational/reset_summary">Reset Summary</a></li>
+						  <li><a href="http://client.delfosim.com/dashboard/Operational/operation_summary_alarm">Alarm Operational Summary</a></li>
+						</ul>
+					</li>
+		
+		<li class="" style="text-align: left;">
+			<a href="javascript:;" data-toggle="collapse" data-target="#admin" aria-expanded="false" aria-controls="management"><i class="fa fa-fw fa-user" aria-hidden="true"></i> Admin <i class="fa fa-fw fa-caret-down"></i></a>
+			<ul id="admin" class="collapse">
+			<li><a href="http://client.delfosim.com/dashboard/Admin/logs/index.php">Logs  </a></li>
+			  
+				
+			</ul>
+		</li><div class="logo-flex"><img class="logo-omega-b" src="vjc.png"></img></div></ul></nav>
+      <div id="page-wrapper" class="bg-index">
+
+        <div class="container-fluid">
+           
+
+   <div class="row">
+
+      <div class="col-lg-12 ">
+	  
+			<div class="row">
+				<br>
+				<form class="form-horizontal" role="form">
+					<div class="form-group">
+						<label for="wo" class="col-sm-4 control-label">
+							<font color="black">
+								Escreva um comentário para o downtime</font>
+							</label>
+						<div class="col-sm-2 col-lg-7">
+							<input type="text" rows="5" name="wo" id="wo" class="form-control" required/>
+						</div>
+						<a href="#" id=process_input><button class="btn btn-warning">BUSCAR</button></a>
+					</div>
+				</form>
+				<div style="text-align: center">
+					<label id="errorAlert" class="alert alert-danger" role="alert" style="display:none;"></label>
+				</div>
+				<form id="queryForm" style="text-align: center; display: none;">
+					<a href="#" id=query>
+						<input type="text" name="system" style="display: none" />
+						<button class="btn btn-warning">
+							<div id="classification" style="text-align: center;">
+								<label id="successAlert" class="alert alert-warning" role="alert" style="display:none;"></label>
+								<br>
+								<label id="queryOption" style="display:none; color: white"></label>
+							</div>
+						</button>
+					</a>
+				</form>
+			
+				<br>
+		
+			</div>
+			
+			<div class="table-responsive">
+
+				<table class="table table-bordered table-hover table-striped" id = "queryResult">
+					<thead >
+						<tr>
+							<th><font color = "black">Downtime ID</font></th>
+							<th><font color = "black">WTG ID</font></th>
+							<th><font color = "black">Alarm Code</font></th>
+							<th><font color = "black">Start Time</font></th>
+							<th><font color = "black">Duration</font></th>
+							<th><font color = "black">Alarm Description</font></th>
+							<th><font color = "black">Park ID</font></th>
+							<th><font color = "black">Downtime Comment</font></th>
+							<th><font color = "black">Failure Description</font></th>
+							<th><font color = "black">System Failure</font></th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				  </table>
+			</div>
+		</div>
+
+
+      </div>
+
+</div>
+
+
+
+</body>
+
+</html>
